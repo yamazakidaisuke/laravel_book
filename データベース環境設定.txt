@@ -1,0 +1,155 @@
+#--------------------------------------------
+#５．DB起動確認(rootユーザでDB作成)・phpMyAdmin設定
+#--------------------------------------------
+sudo service mysqld restart
+mysql -u root -p
+[Enter] ※パスワードなし
+show databases;
+create database c9;
+update mysql.user set password=password('root') where user='root';
+flush privileges;
+exit;
+
+
+#--------------------------------------------
+#６ .envファイルのDB設定 
+#--------------------------------------------
+DB_HOST=localhost
+DB_DATABASE=c9
+DB_USERNAME=root
+DB_PASSWORD=root
+
+
+# [.env] 設定を変更したら「必ずWebサーバーを再起動」です！！
+------
+#Webサーバー止める
+[ Ctl + C ]キーでWebサーバーを止めます。
+------
+#Webサーバー起動（.envの再読み込み！）
+php artisan serve --port=8080
+-------
+
+
+#6.[完了]DB接続設定完了***
+#  ＜重要＞間違うと「データ構造を作成（テーブル作成）」の次章でError!
+
+
+
+
+#--------------------------------------------
+# <時間がかかるので設定先にやります>
+# /app/Providers/ AppServiceProvider.php ファイルを修正
+# Laravel5.5以上設定！
+#--------------------------------------------
+use Illuminate\Support\Facades\Schema; //この行を追加
+use Illuminate\Support\Facades\URL;    //この行を追加
+public function boot() {
+   Schema::defaultStringLength(191);   //この行を追加
+   URL::forceScheme('https');          //この行を追加
+}
+
+#[完了]Laravel5.5以上 対応設定 完了***
+
+
+
+#----------------------
+#phpMyAdmin設定
+#----------------------
+cd public   ＃publicフォルダに移動
+
+wget https://files.phpmyadmin.net/phpMyAdmin/4.8.3/phpMyAdmin-4.8.3-all-languages.zip
+
+unzip phpMyAdmin-4.8.3-all-languages.zip
+
+#＜手順解説＞
+#5.1 publicフォルダ内に「phpMyAdmin-4.8.3-all-languages」フォルダが作成される 
+#5.2 フォルダ名が長いので「phpMyAdmin」に変更
+#5.3「Preview」でサイトを開き、URLの最後に「phpMyAdmin/index.php」をつけてEnterキーを押す
+#5.4 URL例： https://＊＊＊＊＊＊.cloud9.us-east-1.amazonaws.com/phpMyAdmin/index.php
+#5.5 phpMyAdmin画面が表示されたら： ユーザー名・パスワードともに「root」を入力してログイン
+#5.6 ログインできればOK
+
+#5.[完了]DB動作＆コマンド確認完了***
+
+#*********************************************************************************
+#ここまでが初期設定
+#*********************************************************************************
+
+
+
+
+
+
+#***************************
+# ◇第２章◇
+# データ構造を作成（テーブル作成） 
+#***************************
+#--------------------------------------------
+#１．booksテーブルを作成（マイグレーションファイル作成）
+#--------------------------------------------
+php artisan make:migration create_books_table --create=books
+
+#1.[完了]Tableを作成するMigrationファイルを作成 完了***
+
+
+#--------------------------------------------
+#２．[年]_[月]_[日]_[時分秒]_create_books_table.php
+#   public function up(){...}の中を追加修正
+#--------------------------------------------
+public function up()
+    {
+        Schema::create('books', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('item_name');
+            $table->integer('item_number');
+            $table->integer('item_amount');
+            $table->datetime('published');
+            $table->timestamps();
+        });
+}
+
+#2.[完了]Table作成するスクリプト準備 完了***
+
+
+#--------------------------------------------
+#３．マイグレーションを実行（テーブル作成）
+#--------------------------------------------
+php artisan migrate
+
+#3.[完了]Table作成スクリプト実行 完了***
+
+
+#--------------------------------------------
+#４．MySQL DBに作成されたテーブルを確認 
+#--------------------------------------------
+#ブラウザで確認：する場合[phpMyAdmin]
+# URL例： https://***********.com/phpMyAdmin/
+
+# ※コマンドで確認する場合（コマンドに慣れてる人用）
+mysql -u root -p
+root [Enterキー]
+use c9;
+show tables;
+desc books;
+exit;
+
+
+#4.[完了]Table作成をMySQLコマンドで確認 完了***
+
+
+
+#--------------------------------------------
+#５．モデルを作成（テーブルを簡単に扱えるようにする機能）
+#--------------------------------------------
+php artisan make:model Book
+
+#5.[完了]DBを簡単に操作するためのファイルを作成 完了***
+
+
+#--------------------------------------------
+#６．モデルを作成（テーブルを簡単に扱えるようにする機能）
+#   /app/Book.php に作成されます。
+#--------------------------------------------
+
+#6.[完了]/app/Book.phpにファイルができて完了***
+
