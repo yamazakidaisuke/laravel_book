@@ -1,0 +1,347 @@
+
+#***************************
+# 第３章
+# ルート定義（ルーティング）
+#***************************
+#--------------------------------------------
+#１．/routes/web.php に 以下コードを貼り付けます。
+#--------------------------------------------
+#以下[END]までの全てのコードをコピー
+
+
+use App\Book;
+use Illuminate\Http\Request;
+
+/**
+* 本のダッシュボード表示(books.blade.php)
+*/
+Route::get('/', function () {
+    return view('welcome');
+});
+
+/**
+* 新「本」を追加 
+*/
+Route::post('/books', function (Request $request) {
+    //
+});
+
+/**
+* 本を削除 
+*/
+Route::delete('/book/{book}', function (Book $book) {
+    //
+});
+
+
+
+#[END]--------------------------------------------
+
+
+
+
+
+#***************************
+# View
+#***************************
+#--------------------------------------------
+#１．Auth( ユーザー登録・認証画面 )
+#--------------------------------------------
+# laravel/ui パッケージをインストール（４ステップ！）
+# 【注意】Laraveのバージョンを確認して実行しないとErrorになります！！
+-----
+#1. Laravel 6.x の場合
+composer require laravel/ui:^1.0 --dev
+-----
+#1. laravel 7.x の場合
+composer require laravel/ui
+-----
+
+#2. artisan コマンドを実行
+php artisan ui vue --auth
+
+#3. npmパッケージをインストール
+npm install
+
+#4. パッケージをビルド
+npm run dev
+--------------------------------------------------
+// ログイン機能・画面が作成されました。
+
+
+
+#--------------------------------------------
+#２．/resources/views/books.blade.php を作成
+#   以下コードを貼り付けます。
+#--------------------------------------------
+#以下[END]までの全てのコードをコピー
+
+
+<!-- resources/views/books.blade.php -->
+@extends('layouts.app')
+@section('content')
+    <!-- Bootstrapの定形コード… -->
+    <div class="card-body">
+        <div class="card-title">
+            本のタイトル
+        </div>
+        
+        <!-- バリデーションエラーの表示に使用-->
+        @include('common.errors')
+        <!-- バリデーションエラーの表示に使用-->
+
+        <!-- 本登録フォーム -->
+        <form action="{{ url('books') }}" method="POST" class="form-horizontal">
+            @csrf
+
+            <!-- 本のタイトル -->
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <input type="text" name="item_name" class="form-control">
+                </div>
+            </div>
+
+            <!-- 本 登録ボタン -->
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <button type="submit" class="btn btn-primary">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Book: 既に登録されてる本のリスト -->
+
+@endsection
+
+
+
+#[END]--------------------------------------------
+
+
+
+
+
+#--------------------------------------------
+# ３．/resources/views/common/errors.blade.php を作成 
+# 以下コードを貼り付けます。
+#--------------------------------------------
+#以下[END]までの全てのコードをコピー
+
+
+<!-- resources/views/common/errors.blade.php -->
+@if (count($errors) > 0)
+    <!-- Form Error List -->
+    <div class="alert alert-danger">
+        <div><strong>入力した文字を修正してくた?さい。</strong></div> 
+        <div>
+            <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+            </ul>
+        </div>
+    </div>
+@endif
+
+
+
+#[END]--------------------------------------------
+
+
+
+
+#--------------------------------------------
+#４．/routes/web.php  以下コードに修正
+#--------------------------------------------
+#以下[END]までの全てのコードをコピー
+
+/**
+* 本のダッシュボード表示(books.blade.php)
+*/
+Route::get('/', function () {
+    return view('books');  //＊＊ ここを修正 ＊＊
+});
+
+
+
+#--------------------------------------------
+#５．ブラウザプレビュー確認
+#--------------------------------------------
+#*エラーが出る場合
+/resources/views/layouts/app.blade.php を修正
+#２箇所の修正（https対応）
+13行目： {{ asset('js/app.js') }} を {{ asset('js/app.js',true) }}
+20行目： {{ asset('css/app.css') }} を {{ asset('css/app.css',true) }}
+#--------------------------------------------
+
+
+
+
+#***************************
+# Chapter10
+#***************************
+#--------------------------------------------
+#１．/routes/web.php
+#   『新「本」を追加』のルート定義に以下コードを上書き。
+#--------------------------------------------
+#以下[END]までの全てのコードをコピー
+
+
+Route::post('/books', function (Request $request) {
+
+    //バリデーション
+    $validator = Validator::make($request->all(), [
+        'item_name' => 'required|max:255',
+    ]);
+
+    //バリデーション:エラー 
+    if ($validator->fails()) {
+        return redirect('/')
+            ->withInput()
+            ->withErrors($validator);
+    }
+    //以下に登録処理を記述（Eloquentモデル）
+
+
+
+
+});
+
+
+#[END]--------------------------------------------
+
+
+
+
+#--------------------------------------------
+#２．/routes/web.php 
+#   //以下に登録処理を記述（Eloquentモデル）コメントの下に以下コードを貼り付けます。
+#--------------------------------------------
+#以下[END]までの全てのコードをコピー
+
+
+// Eloquentモデル
+$books = new Book;
+$books->item_name = $request->item_name;
+$books->item_number = '1';
+$books->item_amount = '1000';
+$books->published = '2017-03-07 00:00:00';
+$books->save(); 
+return redirect('/');
+
+
+#[END]--------------------------------------------
+
+
+
+#***************************
+# Chapter11
+#***************************
+#--------------------------------------------
+#１．/routes/web.php
+#   『本のダッシュボード表示 』のルート定義に以下コードを上書き。
+#--------------------------------------------
+#以下[END]までの全てのコードをコピー
+
+
+Route::get('/', function () {
+    $books = Book::orderBy('created_at', 'asc')->get();
+    return view('books', [
+        'books' => $books
+    ]);
+    //return view('books',compact('books')); //も同じ意味
+});
+
+
+#[END]--------------------------------------------
+
+
+
+
+#--------------------------------------------
+#２．/resources/views/books.blade.php
+#   books.blade.php内の</form>タグの下行に以下コート?を追記
+#--------------------------------------------
+#以下[END]までの全てのコードをコピー
+
+
+     <!-- 現在の本 -->
+    @if (count($books) > 0)
+        <div class="card-body">
+            <div class="card-body">
+                <table class="table table-striped task-table">
+                    <!-- テーブルヘッダ -->
+                    <thead>
+                        <th>本一覧</th>
+                        <th>&nbsp;</th>
+                    </thead>
+                    <!-- テーブル本体 -->
+                    <tbody>
+                        @foreach ($books as $book)
+                            <tr>
+                                <!-- 本タイトル -->
+                                <td class="table-text">
+                                    <div>{{ $book->item_name }}</div>
+                                </td>
+
+                                <!-- 本: 削除ボタン -->
+                                <td>
+
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    @endif
+
+
+
+#[END]--------------------------------------------
+
+
+
+
+#***************************
+# Chapter1２
+#***************************
+#--------------------------------------------
+#１．/resources/views/books.blade.php
+#   <!-- 本: 削除ボタン -->下の<td></td>要素内に追加
+#--------------------------------------------
+#以下[END]までの全てのコードをコピー
+
+
+    <form action="{{ url('book/'.$book->id) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        
+        <button type="submit" class="btn btn-danger">
+            削除
+        </button>
+     </form>
+
+
+
+#[END]--------------------------------------------
+
+
+
+#--------------------------------------------
+#２．/routes/web.php
+#   『本を削除』のルート定義を追加編集
+#--------------------------------------------
+#以下[END]までの全てのコードをコピー
+
+
+Route::delete('/book/{book}', function (Book $book) {
+    $book->delete();       //追加
+    return redirect('/');  //追加
+});
+
+
+
+#[END]--------------------------------------------
