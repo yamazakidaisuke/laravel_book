@@ -1,38 +1,27 @@
 #---------------------------------------
-# 「はじめてのLaravel6入門 ~ AWS Cloud9で学ぶ ~」
-# https://www.amazon.co.jp/dp/B07XZNJT6D/
+# Laravel本「サンプルコマンド・サンプルコード」
 #---------------------------------------
-# Update: 2020-08-27 
 # Author: Yamazaki Daisuke [G'sACADEMY]
 # 超速体験用
 #---------------------------------------
-
-
-
-#****************************************
-# Display browser: Chrome, Firefox, Edge
-# AWS+Cloud9 & Laravel6.*   最短！コマンド＆コード集！！
-# 以下は解説を抜かしてあるため、最短の制作ができるコマンドリストです。
-# 順番に進めていくだけでシンプルなアプリが作れます。
-# 以下順番に実行していきましょう！！！
-#****************************************
-
-
 
 <<設定確認>>
  「Create environment」で新規作成する際に、
  EC2 [ t2.small ] をセレクトボックスで選択していること!!
  ※Laravel6より Memory 2G 必須のため
 
-
-
 #***************************
 # ◇ 第１章 ◇
 # 環境構築（PHP7.2アップデート＆Laravel6インストール） 
 #***************************
 #--------------------------------------------
-#１．Cloud9_PHP7.2_Updateコマンド 
-#   注意 → sudoからここのコマンドは始まります。＊コピペ失敗要注意！！
+#１．PHPバージョン確認コマンド ＊コピペ失敗要注意！！
+#--------------------------------------------
+php -v
+
+#--------------------------------------------
+#２．Cloud9：PHP7.2_Updateコマンド 
+#   注意 → コマンド１行が長いのでコピペ失敗には要注意！！
 #--------------------------------------------
 
 sudo yum -y install php72 php72-cli php72-common php72-devel php72-mysqlnd php72-pdo php72-xml php72-gd php72-intl php72-mbstring php72-mcrypt php72-opcache php72-pecl-apcu php72-pecl-imagick php72-pecl-memcached php72-pecl-redis php72-pecl-xdebug
@@ -40,6 +29,11 @@ sudo yum -y install php72 php72-cli php72-common php72-devel php72-mysqlnd php72
 sudo alternatives --set php /usr/bin/php-7.2
 
 php -v
+
+#--------------------------------------------
+#３．Cloud9：PHP7.2_Updateコマンド 
+#   注意 → コマンド１行が長いのでコピペ失敗には要注意！！
+#--------------------------------------------
 
 curl -sS https://getcomposer.org/installer | php
 
@@ -49,6 +43,7 @@ composer
 
 #--------------------------------------------
 #1.[完了]PHP7.2 インストール完了***
+
 
 
 
