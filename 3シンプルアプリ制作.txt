@@ -13,14 +13,14 @@ use App\Book;
 use Illuminate\Http\Request;
 
 /**
-* 本のダッシュボード表示(books.blade.php)
+* 本の一覧表示(books.blade.php)
 */
 Route::get('/', function () {
     return view('welcome');
 });
 
 /**
-* 新「本」を追加 
+* 本を追加 
 */
 Route::post('/books', function (Request $request) {
     //
@@ -169,7 +169,7 @@ Route::get('/', function () {
 #--------------------------------------------
 #５．ブラウザプレビュー確認
 #--------------------------------------------
-#*エラーが出る場合
+#*エラーが出る場合（CSSが当たっていないなど）
 /resources/views/layouts/app.blade.php を修正
 #２箇所の修正（https対応）
 13行目： {{ asset('js/app.js') }} を {{ asset('js/app.js',true) }}
@@ -202,10 +202,15 @@ Route::post('/books', function (Request $request) {
             ->withInput()
             ->withErrors($validator);
     }
-    //以下に登録処理を記述（Eloquentモデル）
-
-
-
+    
+    // Eloquentモデル（登録処理）
+    $books = new Book;
+    $books->item_name = $request->item_name;
+    $books->item_number = '1';
+    $books->item_amount = '1000';
+    $books->published = '2017-03-07 00:00:00';
+    $books->save(); 
+    return redirect('/');
 
 });
 
@@ -214,25 +219,6 @@ Route::post('/books', function (Request $request) {
 
 
 
-
-#--------------------------------------------
-#２．/routes/web.php 
-#   //以下に登録処理を記述（Eloquentモデル）コメントの下に以下コードを貼り付けます。
-#--------------------------------------------
-#以下[END]までの全てのコードをコピー
-
-
-// Eloquentモデル
-$books = new Book;
-$books->item_name = $request->item_name;
-$books->item_number = '1';
-$books->item_amount = '1000';
-$books->published = '2017-03-07 00:00:00';
-$books->save(); 
-return redirect('/');
-
-
-#[END]--------------------------------------------
 
 
 
