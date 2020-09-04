@@ -45,6 +45,14 @@ composer
 #1.[完了]PHP7.2 インストール完了***
 
 
+#-------------------------------------------
+#t2.micro選択：Swap (Can not Memory エラーの場合：１GSwapを用意)
+#確認コマンド：free
+#-------------------------------------------
+sudo dd if=/dev/zero of=/swapfile bs=1M count=1024
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
 
 
 #--------------------------------------------
