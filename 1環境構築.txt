@@ -54,6 +54,15 @@ composer global require "laravel/installer"
 #2.[完了]Laravel インストール完了***
 
 
+#-------------------------------------------
+# 0. SWap作成：メモリ不足エラーにならないために
+#t2.micro選択：Swap (Can not Memory エラーの場合：１GSwapを用意)
+#確認コマンド：free
+#-------------------------------------------
+sudo dd if=/dev/zero of=/swapfile bs=1M count=1024
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
 
 #--------------------------------------------
 #３．Laravel6.* をcmsディレクトリに設置 
@@ -61,6 +70,12 @@ composer global require "laravel/installer"
 composer create-project laravel/laravel cms 6.* --prefer-dist
 #--------------------------------------------
 #3.[完了]Laravel "cmsフォルダ"を作ってその中にLaravelを設置完了***
+
+#-------------------------------------------
+# SWap削除
+#-------------------------------------------
+sudo swapoff /swap
+sudo rm /swap
 
 
 #--------------------------------------------
