@@ -46,34 +46,9 @@ Route::delete('/book/{book}', function (Book $book) {
 #***************************
 #--------------------------------------------
 # ＜重要＞AWS t2.micro 無料枠の人はコマンドからはできません！！
-# 下のリンクからサンプルをダウンロードして同じ階層にフォルダ毎アップロードしてください。それだけでOKです。
-# URL: https://github.com/yamazakidaisuke/laravel_book/raw/master/Auth.zip
+# １．下のリンクからサンプルをダウンロードして同じ階層にフォルダ毎アップロードしてください。それだけでOKです。
 #--------------------------------------------
-#１．Auth( ユーザー登録・認証画面 )
-# AWS t2.micro 無料枠の人はここのコマンドは飛ばして、上のURLからダウンロードしてアップロードしてください。
-#--------------------------------------------
-# laravel/ui パッケージをインストール（４ステップ！）
-# 【注意】Laraveのバージョンを確認して実行しないとErrorになります！！
------
-#1. バージョン6.x の場合
-composer require laravel/ui:^1.0 --dev
------
-#1. バージョン7.x の場合
-composer require laravel/ui
------
-
-#2. artisan コマンドを実行
-php artisan ui vue --auth
-
-#3. npmパッケージをインストール
-npm install
-
-#4. パッケージをビルド
-npm run dev
---------------------------------------------------
-// ログイン機能・画面が作成されました。
-
-
+https://github.com/yamazakidaisuke/laravel_book/raw/master/Auth.zip
 
 
 #--------------------------------------------
