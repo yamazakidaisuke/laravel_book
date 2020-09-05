@@ -55,9 +55,8 @@ composer global require "laravel/installer"
 
 
 #-------------------------------------------
-# 0. SWap作成：メモリ不足エラーにならないために
-#t2.micro選択：Swap (Can not Memory エラーの場合：１GSwapを用意)
-#確認コマンド：free
+#４. SWap作成：メモリ不足エラーにならないために
+#    t2.microには512MのSwapを用意
 #-------------------------------------------
 sudo dd if=/dev/zero of=/swapfile bs=1M count=512
 sudo chmod 600 /swapfile
@@ -65,14 +64,14 @@ sudo mkswap /swapfile
 sudo swapon /swapfile
 
 #--------------------------------------------
-#３．Laravel6.* をcmsディレクトリに設置 
+#５．Laravel6.* をcmsディレクトリに設置 
 #--------------------------------------------
 composer create-project laravel/laravel cms 6.* --prefer-dist
 #--------------------------------------------
 #3.[完了]Laravel "cmsフォルダ"を作ってその中にLaravelを設置完了***
 
 #-------------------------------------------
-# SWap削除
+#６．SWap削除（上記コマンド終了したらSWap削除します）
 #-------------------------------------------
 sudo swapoff /swapfile
 sudo rm /swapfile
@@ -80,7 +79,7 @@ sudo swapoff -a && swapon -a
 #swapon: cannot open /var/swapfile: Permission denied と出ますが無視してOK
 
 #--------------------------------------------
-#４．MySQL起動＆Apache起動
+#７．MySQL起動＆Apache起動
 #--------------------------------------------
 sudo service mysqld restart
 cd cms
@@ -93,7 +92,7 @@ php artisan serve --port=8080
 
 
 #**********************************************
-#  超大事！！！！！！！！！！！！！！！
+#  ＊超大事！！！！
 #  いつも使うので、覚えておくか直ぐコピペできる場所に書いておきましょう！
 #**********************************************
 #MySQL起動（ログインしたら必ず実行）
