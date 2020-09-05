@@ -76,30 +76,19 @@ composer create-project laravel/laravel cms 6.* --prefer-dist
 #-------------------------------------------
 sudo swapoff /swapfile
 sudo rm /swapfile
-
+sudo swapoff -a && swapon -a
 
 #--------------------------------------------
-#４．Apache起動
+#４．MySQL起動＆Apache起動
 #--------------------------------------------
+sudo service mysqld restart
 cd cms
-#--------------------------------------------
-sudo composer update
-#--------------------------------------------
-
-#APP KEYの再取得
-#--------------------------------------------
-php artisan key:generate
-#--------------------------------------------
-
-#Webサーバー起動
-#--------------------------------------------
 php artisan serve --port=8080
 #--------------------------------------------
 #4. [完了]Webサーバー起動確認***
 #4.1 Preview→ [Preview Running Application]選択
 #4.2 /resouces/views/welcome.blade.php を編集して見よう！
 #4.3 ブラウザ・更新で確認 →　変更確認できればOK
-
 
 
 #**********************************************
