@@ -59,7 +59,7 @@ composer global require "laravel/installer"
 #t2.micro選択：Swap (Can not Memory エラーの場合：１GSwapを用意)
 #確認コマンド：free
 #-------------------------------------------
-sudo dd if=/dev/zero of=/swapfile bs=1M count=1024
+sudo dd if=/dev/zero of=/swapfile bs=1M count=512
 sudo chmod 600 /swapfile
 sudo mkswap /swapfile
 sudo swapon /swapfile
@@ -74,8 +74,8 @@ composer create-project laravel/laravel cms 6.* --prefer-dist
 #-------------------------------------------
 # SWap削除
 #-------------------------------------------
-sudo swapoff /swap
-sudo rm /swap
+sudo swapoff /swapfile
+sudo rm /swapfile
 
 
 #--------------------------------------------
