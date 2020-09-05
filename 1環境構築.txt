@@ -76,7 +76,8 @@ composer create-project laravel/laravel cms 6.* --prefer-dist
 #-------------------------------------------
 sudo swapoff /swapfile
 sudo rm /swapfile
-sudo swapoff -a && swapon -a
+sudo swapoff -a && swapon -a  
+#swapon: cannot open /var/swapfile: Permission denied と出ますが無視してOK
 
 #--------------------------------------------
 #４．MySQL起動＆Apache起動
