@@ -44,29 +44,21 @@ Route::delete('/book/{book}', function (Book $book) {
 #***************************
 # View
 #***************************
-
-#-------------------------------------------
-# 0. メモリ不足エラーにならないために
-#t2.micro選択：Swap (Can not Memory エラーの場合：１GSwapを用意)
-#確認コマンド：free
-#-------------------------------------------
-free
-sudo dd if=/dev/zero of=/swapfile bs=1M count=1024
-sudo chmod 600 /swapfile
-sudo mkswap /swapfile
-sudo swapon /swapfile
-free
-
+#--------------------------------------------
+# ＜重要＞AWS t2.micro 無料枠の人はコマンドからはできません！！
+# 下のリンクからサンプルをダウンロードして同じ階層にフォルダ毎アップロードしてください。それだけでOKです。
+# URL: https://github.com/yamazakidaisuke/laravel_book/raw/master/Auth.zip
 #--------------------------------------------
 #１．Auth( ユーザー登録・認証画面 )
+# AWS t2.micro 無料枠の人はここのコマンドは飛ばして、上のURLからダウンロードしてアップロードしてください。
 #--------------------------------------------
 # laravel/ui パッケージをインストール（４ステップ！）
 # 【注意】Laraveのバージョンを確認して実行しないとErrorになります！！
 -----
-#1. Laravel 6.x の場合
+#1. バージョン6.x の場合
 composer require laravel/ui:^1.0 --dev
 -----
-#1. laravel 7.x の場合
+#1. バージョン7.x の場合
 composer require laravel/ui
 -----
 
@@ -80,6 +72,7 @@ npm install
 npm run dev
 --------------------------------------------------
 // ログイン機能・画面が作成されました。
+
 
 
 
