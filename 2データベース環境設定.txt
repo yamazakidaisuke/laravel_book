@@ -1,7 +1,6 @@
 #--------------------------------------------
 #５．DB起動確認(rootユーザでDB作成)・phpMyAdmin設定
 #--------------------------------------------
-sudo service mysqld restart
 mysql -u root -p
 [Enter] ※パスワードなし
 show databases;
@@ -48,7 +47,7 @@ public function boot() {
    URL::forceScheme('https');          //この行を追加
 }
 
-#[完了]Laravel5.5以上 対応設定 完了***
+#[完了]Laravel6.x以上 対応設定 完了***
 
 
 
