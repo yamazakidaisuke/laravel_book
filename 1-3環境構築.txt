@@ -104,7 +104,7 @@ php artisan serve --port=8080
 
 
 #--------------------------------------------
-#５．DB起動確認(rootユーザでDB作成)・phpMyAdmin設定
+#８．DB起動確認(rootユーザでDB作成)・phpMyAdmin設定
 #--------------------------------------------
 mysql -u root -p
 [Enter] ※パスワードなし
