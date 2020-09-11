@@ -102,3 +102,18 @@ sudo service mysqld restart
 php artisan serve --port=8080
 #**********************************************
 
+
+#--------------------------------------------
+#５．DB起動確認(rootユーザでDB作成)・phpMyAdmin設定
+#--------------------------------------------
+mysql -u root -p
+[Enter] ※パスワードなし
+show databases;
+create database c9;
+update mysql.user set password=password('root') where user='root';
+flush privileges;
+exit;
+
+
+
+
