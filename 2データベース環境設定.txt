@@ -1,42 +1,121 @@
+#--------------------------------------------
+# ◇4 ~ 
+#--------------------------------------------
+
+
 
 #--------------------------------------------
-#６ .envファイルのDB設定 
+#１.envファイルのDB設定 
 #--------------------------------------------
 DB_HOST=localhost
 DB_DATABASE=c9
 DB_USERNAME=root
 DB_PASSWORD=root
-
-
-# [.env] 設定を変更したら「必ずWebサーバーを再起動」です！！
 ------
-#Webサーバー止める
+# 1.2 [.env] 設定を変更したら「必ずWebサーバーを再起動」です！！
+↓  ↓  ↓  ↓  ↓
+
 [ Ctl + C ]キーでWebサーバーを止めます。
-------
-#Webサーバー起動（.envの再読み込み！）
+
 php artisan serve --port=8080
+
+↑　↑　↑　↑　↑
 -------
-
-
-#6.[完了]DB接続設定完了***
-#  ＜重要＞間違うと「データ構造を作成（テーブル作成）」の次章でError!
+#１.[完了]DB接続設定完了***
+#  ＜重要＞間違うと「データ構造を作成（テーブル作成）」の次章でError!になります。
 
 
 
 
 #--------------------------------------------
-# <時間がかかるので設定先にやります>
-# /app/Providers/ AppServiceProvider.php ファイルを修正
-# Laravel5.5以上設定！
+#２. booksテーブルを作成用の「マイグレーションファイル作成」
 #--------------------------------------------
+
+php artisan make:migration create_books_table --create=books
+
+#２.[完了]Tableを作成するMigrationファイルを作成 完了***
+
+
+
+
+#--------------------------------------------
+#３．[年]_[月]_[日]_[時分秒]_create_books_table.php
+#   /database/migrations/以下にこのファイルは作成されます。
+#   public function up(){...}の中を修正
+#--------------------------------------------
+public function up()
+    {
+        Schema::create('books', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            //--ここから追加--
+            $table->string('item_name');
+            $table->integer('item_number');
+            $table->integer('item_amount');
+            $table->datetime('published');
+            //--ここまで追加--
+            $table->timestamps();
+        });
+}
+
+#３．[完了]Table作成するスクリプト準備 完了***
+
+
+
+
+#--------------------------------------------
+#４．/app/Providers/AppServiceProvider.php［ファイルを修正］
+#--------------------------------------------
+
 use Illuminate\Support\Facades\Schema; //この行を追加
 use Illuminate\Support\Facades\URL;    //この行を追加
 public function boot() {
-   Schema::defaultStringLength(191);   //この行を追加
-   URL::forceScheme('https');          //この行を追加
+   Schema::defaultStringLength(191);   //boot()内に、この行を追加
+   URL::forceScheme('https');          //boot()内に、この行を追加
 }
 
-#[完了]Laravel6.x以上 対応設定 完了***
+#４．[完了]ファイル修正完了***
+
+
+
+
+#--------------------------------------------
+#５．マイグレーションファイルを実行（テーブルを作成！！）
+#--------------------------------------------
+
+php artisan migrate
+
+#５.[完了]Table作成スクリプト実行 完了***
+
+
+
+
+#--------------------------------------------
+#６.テーブルの確認 
+#--------------------------------------------
+mysql -u root -p
+パスワード入力： root 
+ 
+ use c9;
+ 
+ show tables;
+ 
+ desc books;  #テーブル構造を確認します（図6.4）
+ 
+ 
+ 
+#--------------------------------------------
+#４．MySQL DBに作成されたテーブルを確認 
+#--------------------------------------------
+# MySQLコマンドで確認
+mysql -u root -p
+root [Enterキー] 　※「root」と入力してもカーソルは動かないので、気にせず打ち込む！エラー出たら再度！！
+use c9;
+show tables;
+desc books;
+exit;
+
+#4.[完了]Table作成をMySQLコマンドで確認 完了***
+
 
 
 
@@ -72,57 +151,9 @@ unzip phpMyAdmin-4.8.3-all-languages.zip
 # ◇第２章◇
 # データ構造を作成（テーブル作成） 
 #***************************
-#--------------------------------------------
-#１．booksテーブルを作成（マイグレーションファイル作成）
-#--------------------------------------------
-php artisan make:migration create_books_table --create=books
-
-#1.[完了]Tableを作成するMigrationファイルを作成 完了***
 
 
-#--------------------------------------------
-#２．[年]_[月]_[日]_[時分秒]_create_books_table.php
-#   public function up(){...}の中を追加修正
-#--------------------------------------------
-public function up()
-    {
-        Schema::create('books', function (Blueprint $table) {
-            $table->bigIncrements('id');   //Laravvel7.x[ $table->id(); ]
-            $table->string('item_name');
-            $table->integer('item_number');
-            $table->integer('item_amount');
-            $table->datetime('published');
-            $table->timestamps();
-        });
-}
 
-#2.[完了]Table作成するスクリプト準備 完了***
-
-
-#--------------------------------------------
-#３．マイグレーションを実行（テーブル作成）
-#--------------------------------------------
-php artisan migrate
-
-#3.[完了]Table作成スクリプト実行 完了***
-
-
-#--------------------------------------------
-#４．MySQL DBに作成されたテーブルを確認 
-#--------------------------------------------
-#ブラウザで確認：する場合[phpMyAdmin]
-# URL例： https://***********.com/phpMyAdmin/
-
-# ※コマンドで確認する場合（コマンドに慣れてる人用）
-mysql -u root -p
-root [Enterキー]
-use c9;
-show tables;
-desc books;
-exit;
-
-
-#4.[完了]Table作成をMySQLコマンドで確認 完了***
 
 
 
