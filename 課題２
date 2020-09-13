@@ -1,0 +1,159 @@
+#--------------------------------------------
+# ◇課題２
+#--------------------------------------------
+
+
+
+#**************************************************
+# 課題２答え： ルーティング
+#**************************************************
+routes/web.php に 以下コードを全て上書きします。
+#--------------------------------------------
+#以下[END]までのコードをコピー
+
+
+<?php
+use App\Book;
+use Illuminate\Http\Request; 
+
+//本 ダッシュボード表示
+Route::get('/', 'BooksController@index');
+
+//登録処理
+Route::post('/books','BooksController@store');
+
+//更新画面
+Route::post('/booksedit/{books}','BooksController@edit');
+
+//更新処理
+Route::post('/books/update','BooksController@update');
+
+//本を削除
+Route::delete('/book/{book}','BooksController@destroy');
+
+//Auth
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+
+#[END]--------------------------------------------
+
+
+
+
+
+
+#**************************************************
+# 課題２答え： コントローラ
+#**************************************************
+app/Http/Controllers/BooksController.php 。
+#--------------------------------------------
+#以下[END]までのコードをコピーし、全て上書きする。
+
+
+<?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+
+
+//使うClassを宣言:自分で追加
+use App\Book;   //Bookモデルを使えるようにする
+use Validator;  //バリデーションを使えるようにする
+use Auth;       //認証モデルを使用する
+
+class BooksController extends Controller
+{
+    //本ダッシュボード表示
+    public function index()
+    {
+        $books = Book::orderBy('created_at', 'asc')->get();
+        return view('books', [
+            'books' => $books
+        ]);
+    }
+    
+    //更新画面
+    public function edit(Book $books)
+    {
+        return view('booksedit', [
+            'book' => $books
+        ]);
+    }
+    
+    //更新
+    public function update(Request $request) {
+        //バリデーション
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'item_name' => 'required|min:3|max:255',
+            'item_number' => 'required|min:1|max:3',
+            'item_amount' => 'required|max:6',
+            'published' => 'required',
+        ]); 
+        //バリデーション:エラー 
+        if ($validator->fails()) {
+            return redirect('/')
+                ->withInput()
+                ->withErrors($validator);
+        }
+        $books = Book::find($request->id);
+        $books->item_name   = $request->item_name;
+        $books->item_number = $request->item_number;
+        $books->item_amount = $request->item_amount;
+        $books->published   = $request->published;
+        $books->save();
+        return redirect('/');
+    }
+    
+    //登録
+    public function store(Request $request) {
+        //バリデーション
+        $validator = Validator::make($request->all(), [
+                'item_name' => 'required|min:3|max:255',
+                'item_number' => 'required|min:1|max:3',
+                'item_amount' => 'required|max:6',
+                'published' => 'required',
+        ]);
+        //バリデーション:エラー 
+        if ($validator->fails()) {
+                return redirect('/')
+                    ->withInput()
+                    ->withErrors($validator);
+        }
+        // 本作成処理...
+        $books = new Book;
+        $books->item_name = $request->item_name;
+        $books->item_number = $request->item_number;
+        $books->item_amount = $request->item_amount;
+        $books->published = $request->published;
+        $books->save();
+        return redirect('/');
+    }
+        
+    //削除処理
+    public function destroy(Book $book)
+    {
+        $book->delete();
+        return redirect('/');
+    }
+    
+}
+
+
+
+
+
+
+
+#[END]--------------------------------------------
+
+
+
+
+
+
+
+
+
