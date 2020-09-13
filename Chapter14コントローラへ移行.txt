@@ -1,0 +1,162 @@
+#--------------------------------------------
+# ◇14 ~ 
+#   完成してるコードを用意してます
+#--------------------------------------------
+
+
+
+#**************************************************
+# １．コントローラの作成
+#**************************************************
+#--------------------------------------------
+#以下コマンドを実行、app/Http/Controllers/以下に「BooksController.php」に作成されます。
+
+php artisan make:controller BooksController
+
+#[END]--------------------------------------------
+
+
+
+
+
+#**************************************************
+# ２．/routes/web.phpを修正
+#**************************************************
+#--------------------------------------------
+#以下[END]までの全てのコードをコピーして全て上書きします。
+
+
+<?php
+
+use App\Book;
+use Illuminate\Http\Request;
+
+
+/**
+* 本の一覧表示(books.blade.php)
+*/
+Route::get('/', function () {
+    $books = Book::orderBy('created_at', 'asc')->get();
+    return view('books', [
+        'books' => $books
+    ]);
+    //return view('books',compact('books')); //も同じ意味
+});
+
+/**
+* 本を登録
+*/
+Route::post('/books','BooksController@store');
+
+//更新画面
+Route::post('/booksedit/{books}', function(Book $books) {
+    //{books}id 値を取得 => Book $books id 値の1レコード取得
+    return view('booksedit', ['book' => $books]);
+});
+
+//更新処理
+Route::post('/books/update','BooksController@update');
+
+/**
+* 本を削除 
+*/
+Route::delete('/book/{book}', function (Book $book) {
+    $book->delete();       //追加
+    return redirect('/');  //追加
+});
+
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+#[END]--------------------------------------------
+
+
+
+
+
+
+
+#**************************************************
+# ３．app/Http/Controllers/BooksController.php を修正
+#**************************************************
+#--------------------------------------------
+#以下[END]までの全てのコードをコピーして全て上書きします。
+
+
+<?php
+
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+
+
+//使うClassを宣言:自分で追加
+use App\Book;   //Bookモデルを使えるようにする
+use Validator;  //バリデーションを使えるようにする
+use Auth;       //認証モデルを使用する
+
+class BooksController extends Controller
+{
+    //更新
+    public function update(Request $request) {
+        //バリデーション
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'item_name' => 'required|min:3|max:255',
+            'item_number' => 'required|min:1|max:3',
+            'item_amount' => 'required|max:6',
+            'published' => 'required',
+        ]); 
+        //バリデーション:エラー 
+        if ($validator->fails()) {
+            return redirect('/')
+                ->withInput()
+                ->withErrors($validator);
+        }
+        $books = Book::find($request->id);
+        $books->item_name   = $request->item_name;
+        $books->item_number = $request->item_number;
+        $books->item_amount = $request->item_amount;
+        $books->published   = $request->published;
+        $books->save();
+        return redirect('/');
+    }
+    //登録
+    public function store(Request $request) {
+        //バリデーション
+        $validator = Validator::make($request->all(), [
+                'item_name' => 'required|min:3|max:255',
+                'item_number' => 'required|min:1|max:3',
+                'item_amount' => 'required|max:6',
+                'published' => 'required',
+        ]);
+        //バリデーション:エラー 
+        if ($validator->fails()) {
+                return redirect('/')
+                    ->withInput()
+                    ->withErrors($validator);
+        }
+        // 本作成処理...
+        $books = new Book;
+        $books->item_name = $request->item_name;
+        $books->item_number = $request->item_number;
+        $books->item_amount = $request->item_amount;
+        $books->published = $request->published;
+        $books->save();
+        return redirect('/');
+    }
+}
+
+
+
+
+#[END]--------------------------------------------
+
+
+
+
+
+
+
