@@ -1,47 +1,20 @@
-#***************************
-# ◇ Chapter 22 
-#***************************
+#----------------------
+# phpMyAdminをインストールしておきましょう
+# Cloud9には最初入ってないので、publicフォルにphpMyAdminをダウンロードして解凍して設置が必要です。
+# 以下３つのコマンドで設置まではできます。
+#----------------------
+cd public   ＃cmsフォルダ内の「publicフォルダ」に移動して作業
 
-#--------------------------------------------
-#１．PHPバージョン確認コマンド ＊コピペ失敗要注意！！
-#--------------------------------------------
-cd public
-
-#--------------------------------------------
-#２．Cloud9：PHP7.2_Updateコマンド 
-#   注意 → コマンド１行が長いのでコピペ失敗には要注意！！
-#--------------------------------------------
-cd public
 wget https://files.phpmyadmin.net/phpMyAdmin/4.8.3/phpMyAdmin-4.8.3-all-languages.zip
+
 unzip phpMyAdmin-4.8.3-all-languages.zip
-#--------------------------------------------
-#３．Cloud9：PHP7.2_Updateコマンド 
-#   注意 → コマンド１行が長いのでコピペ失敗には要注意！！
-#--------------------------------------------
 
-curl -sS https://getcomposer.org/installer | php
+#＜手順解説＞
+#1 publicフォルダ内に「phpMyAdmin-4.8.3-all-languages」フォルダが作成される 
+#2 フォルダ名が長いので「phpMyAdmin」に変更
+#3「Preview」でサイトを開き、URLの最後に「phpMyAdmin/index.php」をつけてEnterキーを押す
+#4 URL例： https://＊＊＊＊＊＊.cloud9.us-east-1.amazonaws.com/phpMyAdmin/index.php
+#5 phpMyAdmin画面が表示されたら： ユーザー名・パスワードともに「root」を入力してログイン
+#6 ログインできればOK
 
-sudo mv composer.phar /usr/bin/composer
-
-composer
-
-#--------------------------------------------
-#1.[完了]PHP7.2 インストール完了***
-
-
-#--------------------------------------------
-#２．Laravelインストーラーをダウンロード
-#--------------------------------------------
-composer global require "laravel/installer"
-#--------------------------------------------
-#2.[完了]Laravel ダウンロード完了***
-
-
-#-------------------------------------------
-#４. SWap作成：メモリ不足エラーにならないために
-#    t2.microには512MのSwapを用意
-#-------------------------------------------
-sudo dd if=/dev/zero of=/swapfile bs=1M count=512
-sudo chmod 600 /swapfile
-sudo mkswap /swapfile
-sudo swapon /swapfile
+#[完了]phpMyAdmin完了*** 
