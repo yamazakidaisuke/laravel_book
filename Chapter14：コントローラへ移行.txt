@@ -1,7 +1,116 @@
 #--------------------------------------------
 # ◇Chapter14
-#   完成してるコードを用意してます
+#   課題１：完成してるコードを用意してます
 #--------------------------------------------
+
+
+
+#**************************************************
+# ０．完成画面（books.blade.php）
+#**************************************************
+#--------------------------------------------
+
+@extends('layouts.app')
+@section('content')
+    <!-- Bootstrapの定形コード… -->
+    <div class="card-body">
+        <div class="card-title">
+            本のタイトル
+        </div>
+
+        <!-- バリデーションエラーの表示に使用-->
+        @include('common.errors')
+        <!-- バリデーションエラーの表示に使用-->
+
+        <!-- 本のタイトル -->
+        <form enctype="multipart/form-data" action="{{ url('books') }}" method="POST" class="form-horizontal">
+            @csrf
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="book" class="col-sm-3 control-label">Book</label>
+                    <input type="text" name="item_name" class="form-control">
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label for="amount" class="col-sm-3 control-label">金額</label>
+                    <input type="text" name="item_amount" class="form-control">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="number" class="col-sm-3 control-label">数</label>
+                    <input type="text" name="item_number" class="form-control">
+                </div>
+                
+                  <div class="form-group col-md-6">
+                    <label for="published" class="col-sm-3 control-label">公開日</label>
+                    <input type="date" name="published" class="form-control">
+                </div>    
+            </div>
+
+            <!-- 本 登録ボタン -->
+            <div class="form-row">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <button type="submit" class="btn btn-primary">
+                    Save
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Book: 既に登録されてる本のリスト -->
+    
+     <!-- 現在の本 -->
+    @if (count($books) > 0)
+        <div class="card-body">
+            <div class="card-body">
+                <table class="table table-striped task-table">
+                    <!-- テーブルヘッダ -->
+                    <thead>
+                        <th>本一覧</th>
+                        <th>&nbsp;</th>
+                    </thead>
+                    <!-- テーブル本体 -->
+                    <tbody>
+                        @foreach ($books as $book)
+                            <tr>
+                                <!-- 本タイトル -->
+                                <td class="table-text">
+                                    <div>{{ $book->item_name }}</div>
+                                </td>
+                                <!-- 本: 更新ボタン -->
+                                <td>
+                                    <form action="{{ url('booksedit/'.$book->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary">
+                                            更新
+                                        </button>
+                                    </form>
+                                </td>
+                                <!-- 本: 削除ボタン -->
+                                <td>
+                                    <form action="{{ url('book/'.$book->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        
+                                        <button type="submit" class="btn btn-danger">
+                                            削除
+                                        </button>
+                                     </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <!-- Paginate -->           
+        </div>
+    @endif
+
+@endsection
+
+#[END]--------------------------------------------
+
 
 
 
@@ -20,7 +129,7 @@ php artisan make:controller BooksController
 
 
 #**************************************************
-# ２．/routes/web.phpを修正
+# ２．ルート定義を修正（/routes/web.php）
 #**************************************************
 #--------------------------------------------
 #以下[END]までの全てのコードをコピーして全て上書きします。
@@ -77,13 +186,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 
-
-
 #**************************************************
-# ３．app/Http/Controllers/BooksController.php を修正
+# ３．Booksコントローラを修正（app/Http/Controllers/BooksController.php）
 # * 注意 *
-#   <?php のタグが１行目になるよう貼り付けてください。
-#   <?php のタグの上に空白があるとエラーになります！！　　　
+#   <?php のタグが１行目になるよう貼り付けてください！！
+#   <?php のタグの上に空白があると「エラー」になります！！　　　
 #**************************************************
 #--------------------------------------------
 #以下[END]までの全てのコードをコピーして全て上書きします。
