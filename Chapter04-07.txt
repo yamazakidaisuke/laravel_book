@@ -124,26 +124,6 @@ php artisan make:model Book
 
 
 
-#----------------------
-# phpMyAdminをインストールしておきましょう
-# Cloud9には最初入ってないので、publicフォルにphpMyAdminをダウンロードして解凍して設置が必要です。
-# 以下３つのコマンドで設置まではできます。
-#----------------------
-cd public   ＃cmsフォルダ内の「publicフォルダ」に移動して作業
-
-wget https://files.phpmyadmin.net/phpMyAdmin/4.8.3/phpMyAdmin-4.8.3-all-languages.zip
-
-unzip phpMyAdmin-4.8.3-all-languages.zip
-
-#＜手順解説＞
-#1 publicフォルダ内に「phpMyAdmin-4.8.3-all-languages」フォルダが作成される 
-#2 フォルダ名が長いので「phpMyAdmin」に変更
-#3「Preview」でサイトを開き、URLの最後に「phpMyAdmin/index.php」をつけてEnterキーを押す
-#4 URL例： https://＊＊＊＊＊＊.cloud9.us-east-1.amazonaws.com/phpMyAdmin/index.php
-#5 phpMyAdmin画面が表示されたら： ユーザー名・パスワードともに「root」を入力してログイン
-#6 ログインできればOK
-
-#[完了]phpMyAdmin完了*** 
 
 
 #*********************************************************************************
