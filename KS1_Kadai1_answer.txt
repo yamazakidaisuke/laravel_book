@@ -152,7 +152,7 @@ resources/views/books.blade.phpに、以下コードを全て上書きします�
                 </div>
 
                   <div class="form-group col-md-6">
-                    <label for="published" class="col-sm-3 control-label">公開日</label>
+                    <label for="Published" class="col-sm-3 control-label">公開日</label>
                     <input type="date" name="published" class="form-control">
                 </div>
             </div>
