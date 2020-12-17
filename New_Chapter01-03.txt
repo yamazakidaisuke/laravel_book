@@ -90,7 +90,7 @@ sudo composer update
 
 
 
-#データベース作成
+#データベース「c9」を作成
 mysql -u root -p
 root [Enterキー]
 create database c9;
