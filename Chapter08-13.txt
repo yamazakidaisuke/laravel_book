@@ -245,8 +245,8 @@ Route::get('/', function () {
 
 
     <form action="{{ url('book/'.$book->id) }}" method="POST">
-        @csrf
-        @method('DELETE')
+        @csrf               <!-- CSRFからの保護 -->
+        @method('DELETE')   <!-- 擬似フォームメソッド -->
         
         <button type="submit" class="btn btn-danger">
             削除
