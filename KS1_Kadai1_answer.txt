@@ -243,7 +243,7 @@ booksedit.blade.phpを新規作成し、以下コードを貼り付けます。
 
 @extends('layouts.app')
 @section('content')
-<div class="row">
+<div class="row container">
     <div class="col-md-12">
     @include('common.errors')
     <form action="{{ url('books/update') }}" method="POST">
