@@ -43,7 +43,7 @@ Route::get('/', function () {
 });
 
 /**
-* 本を登録
+* 本を追加
 */
 Route::post('/books','BooksController@store');
 
