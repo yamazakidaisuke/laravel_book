@@ -32,7 +32,7 @@ use Illuminate\Http\Request;
 
 
 /**
-* 本の一覧表示(books.blade.php)
+* 本 ダッシュボード表示
 */
 Route::get('/', function () {
     $books = Book::orderBy('created_at', 'asc')->get();
