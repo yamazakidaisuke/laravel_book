@@ -62,8 +62,8 @@ Route::post('/books/update','BooksController@update');
 * 本を削除 
 */
 Route::delete('/book/{book}', function (Book $book) {
-    $book->delete();       //追加
-    return redirect('/');  //追加
+    $book->delete();
+    return redirect('/');
 });
 
 
