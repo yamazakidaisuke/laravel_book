@@ -104,6 +104,7 @@ php artisan migrate
 mysql -u root -p
 root  #パスワード
 use c9;
+show tables;
 desc books;
 
 #[END]--------------------------------------------
