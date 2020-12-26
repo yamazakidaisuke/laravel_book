@@ -17,6 +17,7 @@
    *
    * @return void
    */
+   //コンストラクタ （このクラスが呼ばれたら最初に処理をする）
     public function __construct()
     {
         $this->middleware('auth');
