@@ -46,9 +46,7 @@ Route::get('/', function () {
     //return view('books',compact('books')); //も同じ意味
 });
 
-/**
-* 本を追加
-*/
+//登録処理
 Route::post('/books','BooksController@store');
 
 //更新画面
