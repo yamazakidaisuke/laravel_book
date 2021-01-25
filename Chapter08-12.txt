@@ -155,14 +155,8 @@ Route::post('/books', function (Request $request) {
             ->withErrors($validator);
     }
     
-    // Eloquentモデル（登録処理）
-    $books = new Book;
-    $books->item_name = $request->item_name;
-    $books->item_number = '1';
-    $books->item_amount = '1000';
-    $books->published = '2017-03-07 00:00:00';
-    $books->save(); 
-    return redirect('/');
+    //以下登録処理が後で追加します！    
+
 
 });
 
@@ -171,9 +165,29 @@ Route::post('/books', function (Request $request) {
 
 
 
-
 #--------------------------------------------
 #６．/routes/web.php
+#   登録処理
+#--------------------------------------------
+#以下[END]までの全てのコードをコピー
+
+
+    // Eloquentモデル（登録処理）
+    $books = new Book;
+    $books->item_name = $request->item_name;
+    $books->item_number = '1';
+    $books->item_amount = '1000';
+    $books->published = '2017-03-07 00:00:00';
+    $books->save(); 
+    return redirect('/');
+    
+    
+#[END]--------------------------------------------
+
+
+
+#--------------------------------------------
+#７．/routes/web.php
 #   『本のダッシュボード表示 』のルート定義に以下コードを上書き。
 #--------------------------------------------
 #以下[END]までの全てのコードをコピー
@@ -194,7 +208,7 @@ Route::get('/', function () {
 
 
 #--------------------------------------------
-#７．/resources/views/books.blade.php
+#８．/resources/views/books.blade.php
 #   books.blade.php内の</form>タグの下行に以下コート?を追記
 #--------------------------------------------
 #以下[END]までの全てのコードをコピー
@@ -238,7 +252,7 @@ Route::get('/', function () {
 
 
 #--------------------------------------------
-#８．/resources/views/books.blade.php
+#９．/resources/views/books.blade.php
 #   <!-- 本: 削除ボタン -->下の<td></td>要素内に追加
 #--------------------------------------------
 #以下[END]までの全てのコードをコピー
@@ -259,7 +273,7 @@ Route::get('/', function () {
 
 
 #--------------------------------------------
-#９．/routes/web.php
+#１０．/routes/web.php
 #   『本を削除』のルート定義を追加編集
 #--------------------------------------------
 #以下削除のところに２行を追加
