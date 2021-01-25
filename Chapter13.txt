@@ -11,6 +11,10 @@
 #--------------------------------------------
 #以下コマンドを実行、app/Http/Controllers/以下に「BooksController.php」に作成されます。
 
+#cmsディレクトリに入って実行
+cd cms
+
+#コントローラー作成
 php artisan make:controller BooksController
 
 #[END]--------------------------------------------
