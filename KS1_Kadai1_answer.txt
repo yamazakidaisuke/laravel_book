@@ -73,7 +73,7 @@ Route::post('/books/update', function(Request $request){
             'item_amount' => 'required|max:6',
             'published' => 'required',
     ]);
-    //バリデーションエラー
+    //バリデーション:エラー
         if ($validator->fails()) {
             return redirect('/')
                 ->withInput()
