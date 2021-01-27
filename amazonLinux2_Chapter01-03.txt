@@ -2,7 +2,11 @@
  「Create environment」で新規作成する際に、
  EC2 [ t2.micro ] デフォルト設定でOKです。
  
+ ＜＜ Youtube動画解説 ＞＞
+  動画にでてくるGithubのコードは以下と一緒です！！
+ https://youtu.be/XGDS6TRWDLU
 
+ 
 #PHPセットアップ
 
 sudo amazon-linux-extras install php7.2=stable
