@@ -11,6 +11,10 @@ unzip phpMyAdmin-4.8.3-all-languages.zip
 
 
 
+#publicの作業が済んだら「cms」フォルダに戻る
+cd ..
+
+
 
 #＜手順解説＞
 #1 publicフォルダ内に「phpMyAdmin-4.8.3-all-languages」フォルダが作成される 
@@ -23,8 +27,6 @@ unzip phpMyAdmin-4.8.3-all-languages.zip
 #[完了]phpMyAdmin完了*** 
 
 
-#publicの作業が済んだら「cms」フォルダに戻る
-cd ..
 
 
 
