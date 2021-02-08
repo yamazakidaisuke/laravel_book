@@ -3,13 +3,13 @@
 # Cloud9には最初入ってないので、publicフォルにphpMyAdminをダウンロードして解凍して設置が必要です。
 # 以下３つのコマンドで設置まではできます。
 #----------------------
-cd public   ＃cmsフォルダ内の「publicフォルダ」に移動して作業
+cd cms/public   ＃cmsフォルダ内の「publicフォルダ」に移動して作業
 
 wget https://files.phpmyadmin.net/phpMyAdmin/4.8.3/phpMyAdmin-4.8.3-all-languages.zip
 
 unzip phpMyAdmin-4.8.3-all-languages.zip
 
-cd cms
+
 
 
 #＜手順解説＞
@@ -21,3 +21,12 @@ cd cms
 #6 ログインできればOK
 
 #[完了]phpMyAdmin完了*** 
+
+
+#publicの作業が済んだら「cms」フォルダに戻る
+cd ..
+
+
+
+
+
