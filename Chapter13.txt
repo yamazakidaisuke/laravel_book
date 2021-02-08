@@ -104,7 +104,8 @@ use Auth;       //認証モデルを使用する
 class BooksController extends Controller
 {
     //更新
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         //バリデーション
         $validator = Validator::make($request->all(), [
             'id' => 'required',
