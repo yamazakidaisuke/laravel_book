@@ -97,7 +97,8 @@ php artisan serve --port=8080
 #MySQL起動（ログインしたら必ず実行）
 sudo service mysqld restart
 
-#Webサーバー起動（ログインしたら必ず実行）
+#Webサーバー起動（ログインしたら必ず実行 ※cmsフォルダ内で実行する必要がある！）
+cd cms
 php artisan serve --port=8080
 #**********************************************
 
@@ -107,8 +108,10 @@ php artisan serve --port=8080
 #--------------------------------------------
 mysql -u root -p
 [Enter] ※パスワードなし
-show databases;
 create database c9;
+show databases;
+use c9;
+show tables;
 update mysql.user set password=password('root') where user='root';
 flush privileges;
 exit;
