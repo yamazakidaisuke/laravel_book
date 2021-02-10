@@ -93,8 +93,8 @@ Route::post('/books/update', function(Request $request){
 * 本を削除 
 */
 Route::delete('/book/{book}', function (Book $book) {
-    $book->delete();       //追加
-    return redirect('/');  //追加
+    $book->delete();
+    return redirect('/');
 });
 
 Auth::routes();
