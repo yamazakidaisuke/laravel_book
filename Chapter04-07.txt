@@ -15,7 +15,7 @@ DB_PASSWORD=root
 # 1.2 [.env] 設定を変更したら「必ずWebサーバーを再起動」です！！
 ↓  ↓  ↓  ↓  ↓
 
-[ Ctl + C ]キーでWebサーバーを止めます。
+[Ctrl] + [C]キーでWebサーバーを止めます。
 
 php artisan serve --port=8080
 
@@ -31,6 +31,10 @@ php artisan serve --port=8080
 #２. booksテーブルを作成用の「マイグレーションファイル作成」
 #--------------------------------------------
 
+#cmsディレクトリに入って実行
+cd cms
+
+#Migrationファイル作成
 php artisan make:migration create_books_table --create=books
 
 #２.[完了]Tableを作成するMigrationファイルを作成 完了***
@@ -69,8 +73,10 @@ public function up()
 use Illuminate\Support\Facades\Schema; //この行を追加
 use Illuminate\Support\Facades\URL;    //この行を追加
 public function boot() {
+   {・・・略・・・}
    Schema::defaultStringLength(191);   //boot()内に、この行を追加
    URL::forceScheme('https');          //boot()内に、この行を追加
+   {・・・略・・・}
 }
 
 #４．[完了]ファイル修正完了***
@@ -95,10 +101,10 @@ php artisan migrate
 # MySQLコマンドで確認
 
 mysql -u root -p
-root [Enterキー] 　#「root」と入力してもカーソルは動かないので、気にせず打ち込む！エラー出たら再度！！
+root [Enter]キー 　#「root」と入力してもカーソルは動かないので、気にせず打ち込む！エラー出たら再度！！
 use c9;
 show tables;
-desc books;        #テーブル構造を確認します（図6.4）
+desc books;        #テーブル構造を確認します (図5.5)
 exit;
 
 #６．[完了]Table作成をMySQLコマンドで確認 完了***
