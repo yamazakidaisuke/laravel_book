@@ -12,11 +12,6 @@
 #以下[END]までのコードをコピーし「class BooksController 」に追加します。
 
 
-  /**
-   * Create a new controller instance.
-   *
-   * @return void
-   */
    //コンストラクタ （このクラスが呼ばれたら最初に処理をする）
     public function __construct()
     {
