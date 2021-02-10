@@ -104,8 +104,7 @@ use Auth;       //認証モデルを使用する
 class BooksController extends Controller
 {
     //更新
-    public function update(Request $request)
-    {
+    public function update(Request $request) {
         //バリデーション
         $validator = Validator::make($request->all(), [
             'id' => 'required',
@@ -120,6 +119,7 @@ class BooksController extends Controller
                 ->withInput()
                 ->withErrors($validator);
         }
+        
         $books = Book::find($request->id);
         $books->item_name   = $request->item_name;
         $books->item_number = $request->item_number;
@@ -143,7 +143,7 @@ class BooksController extends Controller
                     ->withInput()
                     ->withErrors($validator);
         }
-        // 本作成処理...
+        // Eloquentモデル（登録処理）
         $books = new Book;
         $books->item_name = $request->item_name;
         $books->item_number = $request->item_number;
