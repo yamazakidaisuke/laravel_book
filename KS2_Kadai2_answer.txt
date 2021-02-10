@@ -66,8 +66,7 @@ use Auth;       //認証モデルを使用する
 class BooksController extends Controller
 {
     //本ダッシュボード表示
-    public function index()
-    {
+    public function index() {
         $books = Book::orderBy('created_at', 'asc')->get();
         return view('books', [
             'books' => $books
@@ -75,8 +74,7 @@ class BooksController extends Controller
     }
     
     //更新画面
-    public function edit(Book $books)
-    {
+    public function edit(Book $books) {
         return view('booksedit', [
             'book' => $books
         ]);
@@ -133,8 +131,7 @@ class BooksController extends Controller
     }
         
     //削除処理
-    public function destroy(Book $book)
-    {
+    public function destroy(Book $book) {
         $book->delete();
         return redirect('/');
     }
