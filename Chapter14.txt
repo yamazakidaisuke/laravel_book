@@ -11,9 +11,8 @@
 #--------------------------------------------
 #以下[END]までの全てのコード、indexメソッドのみ上書き。
 
-    //本ダッシュボード表示
-    public function index()
-    {
+    //本 ダッシュボード表示
+    public function index() {
         $books = Book::orderBy('created_at', 'asc')->paginate(3);
         return view('books', [
             'books' => $books
