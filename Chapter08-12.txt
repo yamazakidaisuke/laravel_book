@@ -289,3 +289,21 @@ Route::delete('/book/{book}', function (Book $book) {
 
 
 
+
+
+####################################
+# 要注意: 
+# web.php の最後の行に以下「2行」があることを確認してください。
+# ※サンプルの貼り付けで消してしまうことがあります！
+####################################
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+
+
+
+
+
