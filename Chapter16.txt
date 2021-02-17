@@ -1,5 +1,5 @@
 #--------------------------------------------
-# ◇Chapter16 ~ サインイン・ログイン認証
+# ◇Chapter16　本管理アプリ：ログイン認証機能を追加する
 #--------------------------------------------
 
 
@@ -7,7 +7,7 @@
 #**************************************************
 # 1. コンストラクタ（サインイン後にのみ表示するロジック）追加
 #**************************************************
-/app/Http/Controllers/BooksController.php を変更
+/app/Http/Controllers/BooksController.php を変更します（リスト16.3）。
 #--------------------------------------------
 #以下[END]までのコードをコピーし「class BooksController 」に追加します。
 
@@ -27,7 +27,7 @@
 #**************************************************
 # 2. 「サインイン・レジスター」後に表示するページを変更
 #**************************************************
-/routes/web.php 以下のルート定義を変更します。
+/routes/web.php 以下のルート定義を変更します（リスト16.5）。
 #--------------------------------------------
 
 変更前： Route::get('/home', 'HomeController@index')->name('home');
@@ -63,7 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
 #**************************************************
 #１．ユーザーidを登録できるようにbooksテーブルを変更
 #**************************************************
-/database/migrations/[yyyy_mm_dd_hhiiss]_create_books_table.php に以下１行を追加します。
+/database/migrations/[yyyy_mm_dd_hhiiss]_create_books_table.php に以下１行を追加します（リスト16.11）。
 #--------------------------------------------
 
 $table->bigInteger('user_id'); //Add:user_id
@@ -110,7 +110,7 @@ desc books;
 
 
 #**************************************************
-#５．コントローラ「BooksController@index」を修正
+#５．コントローラ「BooksController@index」を修正（リスト16.13）
 #**************************************************
 
  $books = Book::where('user_id',Auth::user()->id)->orderBy('created_at', 'asc')->paginate(3);
@@ -121,7 +121,7 @@ desc books;
 
 
 #**************************************************
-#６．コントローラ「BooksController@store」に追加
+#６．コントローラ「BooksController@store」に追加（リスト16.14）
 #**************************************************
 
 $books->user_id  = Auth::user()->id; //追加のコード
@@ -132,7 +132,7 @@ $books->user_id  = Auth::user()->id; //追加のコード
 
 
 #**************************************************
-#７．コントローラ「BooksController@update」を修正
+#７．コントローラ「BooksController@update」を修正（リスト16.16）
 #**************************************************
 
 $books = Book::where('user_id',Auth::user()->id)->find($request->id);
@@ -143,13 +143,12 @@ $books = Book::where('user_id',Auth::user()->id)->find($request->id);
 
 
 #**************************************************
-#８．コントローラ「BooksController@edit」を修正
+#８．コントローラ「BooksController@edit」を修正（リスト16.18）
 #**************************************************
 #修正範囲が多いのでeditメソッドを上書きでもOK
 
 //更新画面
-public function edit($book_id)
-{
+public function edit($book_id){
     $books = Book::where('user_id',Auth::user()->id)->find($book_id);
     return view('booksedit', [
         'book' => $books
