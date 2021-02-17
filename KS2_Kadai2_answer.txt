@@ -1,4 +1,8 @@
 #--------------------------------------------
+# ◇Chapter13 本管理アプリ：ルート定義以外の各処理をコントローラに移動する
+#--------------------------------------------
+
+#--------------------------------------------
 # ◇KS2.*：課題２(答え)
 #--------------------------------------------
 
@@ -7,7 +11,7 @@
 #**************************************************
 # 課題２答え： ルーティング
 #**************************************************
-routes/web.php に 以下コードを全て上書きします。
+routes/web.php に 以下コードを全て上書きします（リスト13.17、13.19、13.21、13.22）。
 #--------------------------------------------
 #以下[END]までのコードをコピー
 
@@ -16,7 +20,7 @@ routes/web.php に 以下コードを全て上書きします。
 use App\Book;
 use Illuminate\Http\Request; 
 
-//本 ダッシュボード表示
+//本ダッシュボード表示
 Route::get('/', 'BooksController@index');
 
 //登録処理
@@ -48,9 +52,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 #**************************************************
 # 課題２答え： コントローラ
 #**************************************************
-app/Http/Controllers/BooksController.php 。
+app/Http/Controllers/BooksController.phpに以下コードを全て上書きします（リスト13.16、13.18、13.20）。
 #--------------------------------------------
-#以下[END]までのコードをコピーし、全て上書きする。
+#以下[END]までのコードをコピー
 
 
 <?php
@@ -96,6 +100,8 @@ class BooksController extends Controller
                 ->withInput()
                 ->withErrors($validator);
         }
+        
+        //データ更新
         $books = Book::find($request->id);
         $books->item_name   = $request->item_name;
         $books->item_number = $request->item_number;
@@ -120,7 +126,7 @@ class BooksController extends Controller
                     ->withInput()
                     ->withErrors($validator);
         }
-        // Eloquentモデル（登録処理）
+        //Eloquentモデル（登録処理）
         $books = new Book;
         $books->item_name = $request->item_name;
         $books->item_number = $request->item_number;
