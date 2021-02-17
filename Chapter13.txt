@@ -1,5 +1,5 @@
 #--------------------------------------------
-# ◇Chapter13
+# ◇Chapter13　本管理アプリ：ルート定義以外の各処理をコントローラに移動する
 #   課題１：完成してるコードを用意してます
 #--------------------------------------------
 
@@ -23,7 +23,7 @@ php artisan make:controller BooksController
 
 
 #**************************************************
-# ２．ルート定義を修正（/routes/web.php）
+# ２．ルート定義を修正（/routes/web.php）（リスト13.5、13.6、13.7）
 #**************************************************
 #--------------------------------------------
 #以下[END]までの全てのコードをコピーして全て上書きします。
@@ -81,7 +81,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 #**************************************************
-# ３．Booksコントローラを修正（app/Http/Controllers/BooksController.php）
+# ３．Booksコントローラを修正（app/Http/Controllers/BooksController.php）（リスト13.2、13.3、13.5、13.8、13.10、13.12）
 # * 注意 *
 #   <?php のタグが１行目になるよう貼り付けてください！！
 #   <?php のタグの上に空白があると「エラー」になります！！　　　
@@ -120,6 +120,7 @@ class BooksController extends Controller
                 ->withErrors($validator);
         }
         
+        // データ更新
         $books = Book::find($request->id);
         $books->item_name   = $request->item_name;
         $books->item_number = $request->item_number;
