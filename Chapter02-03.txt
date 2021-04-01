@@ -6,7 +6,7 @@
 # <<設定確認>>
 # 「 Create environment 」で新規作成する際に、
 #  EC2 [ t2.micro（無料枠） ]を選択してる想定で用意しています。 
-
+#  この章のYoutube解説： https://youtu.be/GDPuf5Vxoos
 
 
 
