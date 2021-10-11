@@ -61,6 +61,10 @@ composer create-project laravel/laravel cms 6.* --prefer-dist
 cd cms
 
 
+#Composerコマンド実行
+sudo composer update
+
+
 
 #**********************************************
 #  超大事！！！！！！！！！！！！！！！
@@ -76,6 +80,11 @@ cd cms
 php artisan serve --port=8080
 -------
 
+
+#4. [完了]Webサーバー起動確認***
+#4.1 Preview→ [Preview Running Application]選択
+#4.2 /resouces/views/welcome.blade.php を編集して見よう！
+#4.3 ブラウザ・更新で確認 →　変更確認できればOK
 
 
 
@@ -108,15 +117,6 @@ DB_USERNAME=root
 DB_PASSWORD=root
 
 
-#Composerコマンド実行
-sudo composer update
-
-
-#4. [完了]Webサーバー起動確認***
-#4.1 Preview→ [Preview Running Application]選択
-#4.2 /resouces/views/welcome.blade.php を編集して見よう！
-#4.3 ブラウザ・更新で確認 →　変更確認できればOK
-
 
 
 #データベース「c9」を作成
@@ -124,6 +124,7 @@ mysql -u root -p
 root [Enterキー]
 create database c9;
 exit;
+
 
 
 #重要事項：DBについて
