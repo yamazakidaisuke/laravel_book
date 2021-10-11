@@ -126,6 +126,13 @@ create database c9;
 exit;
 
 
+#重要事項：DBについて
+#こちらのAmazonLinux2で環境作った場合は
+#MariaDBは自動で起動するので毎回DBを起動する必要はありません。
+#※AmazonLinux AMI（旧AmazonLinux1）の場合は毎回CLOUD9起動時に必要です！
+
+
+
 
 
 
