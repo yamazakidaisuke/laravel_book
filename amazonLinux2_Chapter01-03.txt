@@ -1,3 +1,5 @@
+#2021-10-11 更新：Laravel6.xインストール不具合を解消！！
+
 <<設定確認>>
  「Create environment」で新規作成する際に、
  EC2 [ t2.micro ] デフォルト設定でOKです。
@@ -8,7 +10,8 @@
 
 sudo amazon-linux-extras install php7.2=stable
 
-sudo yum install php-mbstring php-pecl-memcached php-gd php-apcu php-xml
+
+sudo yum install php-cli php-common php-devel php-fpm php-gd php-mysqlnd php-mbstring php-pdo php-xml
 
 
 # MaryaDB 構築
