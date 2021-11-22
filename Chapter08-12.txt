@@ -26,7 +26,7 @@ https://github.com/yamazakidaisuke/laravel_book/raw/master/Auth.zip
 
 
 #[Tips]本来は以下4コマンドで実装（今回は使用しない！！上で必要なフォルダ・ファイルを追加してるので）
-composer require laravel/ui:^1.0 –dev
+composer require laravel/ui:^1.0 --dev
 php artisan ui vue --auth
 npm install
 npm run dev
