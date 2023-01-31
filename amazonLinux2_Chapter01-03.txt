@@ -1,13 +1,13 @@
-#2021-10-11 更新：Laravel6.xインストール不具合を解消！！
+#2023-01-31 更新：Laravel6.xインストール不具合を解消！！
 
 <<動画解説>>
 https://youtu.be/ISiU3nCSgh0
 
-
 << 重要：設定確認 >>
  「Create environment」で新規作成する際に、
- １．EC2 [ t2.micro ] デフォルト設定でOKです。
- ２．Network Settings → 「SSH」を選択
+ １．Environment type →  デフォルト設定でOK「New EC2 instance」
+ ２．EC2 [ t2.micro ] →  デフォルト設定でOKです。
+ ３．Network Settings → 「SSH」を選択
  
 
  
